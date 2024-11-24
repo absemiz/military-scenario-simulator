@@ -472,11 +472,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 378b8582dc5c3294182bc9cdbeed29f0, type: 3}
       propertyPath: m_Name
-      value: ReaperMQ-9
+      value: UAV
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 378b8582dc5c3294182bc9cdbeed29f0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

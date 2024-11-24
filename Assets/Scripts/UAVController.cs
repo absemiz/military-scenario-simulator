@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ReaperController : MonoBehaviour
+public class UAVController : MonoBehaviour
 {
     public float thrustForce = 15000f; // N*s
     public float turnSpeed = 0.5f; // rad/s

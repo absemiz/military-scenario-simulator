@@ -74,7 +74,10 @@ public class ScenarioEditorServer : MonoBehaviour
 
             if (parsedMessage != null)
             {
-                Debug.Log("Message OK!");
+                string responseMessage = "{\"status\": \"Message OK!\"}";
+                byte[] rawResponseMessage = System.Text.Encoding.UTF8.GetBytes(responseMessage);
+
+                context.Response.OutputStream.Write(rawResponseMessage, 0, rawResponseMessage.Length);
 
                 foreach (var entry in parsedMessage.Entities)
                 {
