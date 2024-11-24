@@ -53,12 +53,12 @@ public class ScenarioEditorServer : MonoBehaviour
         }
         else if (path.EndsWith(".js"))
         {
-            filePath = $"{rootFilePath}/assets/index.js";
+            filePath = $"{rootFilePath}/assets/index-1jdui-py.js";
             context.Response.ContentType = "application/javascript";
         }
         else if (path.EndsWith(".css"))
         {
-            filePath = $"{rootFilePath}/assets/index.css";
+            filePath = $"{rootFilePath}/assets/index-CgUMRhAo.css";
             context.Response.ContentType = "text/css";
         }
         else if (path.EndsWith(".svg"))
@@ -69,11 +69,13 @@ public class ScenarioEditorServer : MonoBehaviour
         else if (path == "/milsimapi")
         {
             Debug.Log("Request received.");
+            Debug.Log(context.Request);
             InitializationMessage parsedMessage = ParseJsonRequest(context.Request);
 
             if (parsedMessage != null)
             {
                 Debug.Log("Message OK!");
+
                 foreach (var entry in parsedMessage.Entities)
                 {
                     Debug.Log($"ID: {entry.ID}, Latitude: {entry.Latitude}, Longitude: {entry.Longitude}");
@@ -107,12 +109,6 @@ public class ScenarioEditorServer : MonoBehaviour
 
             using var fileStream = File.OpenRead(filePath);
             fileStream.CopyTo(context.Response.OutputStream);
-        }
-        else
-        {
-            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-            using var writer = new StreamWriter(context.Response.OutputStream);
-            writer.Write("404 Not Found");
         }
 
         context.Response.Close();
