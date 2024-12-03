@@ -1,0 +1,349 @@
+fileFormatVersion: 2
+guid: 30665cfd49f340044a8c2f85a2967254
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bodymat
+    second: {fileID: 2100000, guid: 09e148df89fd7c34cb8dc8a66908ebfb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bottommat
+    second: {fileID: 2100000, guid: 8f124e998aa07a640aced22287a06786, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyewearmat
+    second: {fileID: 2100000, guid: 40bc6a860e318094a97b4cdb521a477e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glovemat
+    second: {fileID: 2100000, guid: 98fbe5a4e5c41a941ab96cdb299e43fc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hairmat
+    second: {fileID: 2100000, guid: 4d2dea1fca7550c43b8a4f3f94cb2170, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hatmat
+    second: {fileID: 2100000, guid: 02ef7a90ca6d756469e13bb9110abd03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoesmat
+    second: {fileID: 2100000, guid: ed56f64e54a576d47a999c46723bef38, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Topmat
+    second: {fileID: 2100000, guid: d37c476b54831b3448d67eb51c69114a, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Body_Diffuse
+    second: {fileID: 2800000, guid: 30475001a2035bd46835a2658545046d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Body_Gloss
+    second: {fileID: 2800000, guid: eae067faff27b8a4190fd03952ee6a1f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Body_Normal
+    second: {fileID: 2800000, guid: 6da72f611125fd8438d5b70d401007a5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Body_Opacity
+    second: {fileID: 2800000, guid: 2899d54ed9a19664aabab10e88c508a5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Body_Specular
+    second: {fileID: 2800000, guid: 63925811be490b449abc77340f491892, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Bottom_Diffuse
+    second: {fileID: 2800000, guid: b08ef9f2f1904784eba98a917f345f8a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Bottom_Gloss
+    second: {fileID: 2800000, guid: 42f108c30cba45f4ba3adc549e08a31e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Bottom_Normal
+    second: {fileID: 2800000, guid: 6ffdaab869d9229428dbb949532b3972, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Bottom_Opacity
+    second: {fileID: 2800000, guid: ab481a948440169478acda509acf0020, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Bottom_Specular
+    second: {fileID: 2800000, guid: ed09c3107837927478611db856d701cb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Eyewear_Diffuse
+    second: {fileID: 2800000, guid: 86a1c359b6070f74483351694c4c727f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Eyewear_Gloss
+    second: {fileID: 2800000, guid: 84ac1a4f06e853b4bb4d8873033a7b53, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Eyewear_Normal
+    second: {fileID: 2800000, guid: 89ae5316eaa45ba46ba052501629b6cb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Eyewear_Opacity
+    second: {fileID: 2800000, guid: 2626294919dcf8441b227b58f9d96d13, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Eyewear_Specular
+    second: {fileID: 2800000, guid: a468b10f5aa3304439f162bcdba1539c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Glove_Diffuse
+    second: {fileID: 2800000, guid: b2a432d014a96d84b958c6a110159252, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Glove_Gloss
+    second: {fileID: 2800000, guid: 1ce5595c9f59c9f4f9d6f5b73bdfdb30, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Glove_Normal
+    second: {fileID: 2800000, guid: 885e60ef20870a843a7d194632a4bdfb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Glove_Opacity
+    second: {fileID: 2800000, guid: bce74a90828a61f4b9d9fafa1a0873d8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Glove_Specular
+    second: {fileID: 2800000, guid: 6d15315e92210f44db6ce16bd68d7efc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Hair_Diffuse
+    second: {fileID: 2800000, guid: ab6f303427456984b841a8fa3cd03361, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Hair_Gloss
+    second: {fileID: 2800000, guid: 798623dc68766bd43b17967d319c1091, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Hair_Normal
+    second: {fileID: 2800000, guid: 7c600f3ec600a59498b7aad2312784c3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Hair_Opacity
+    second: {fileID: 2800000, guid: 02171d276fff3c24bbb541d29694e1e5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Hair_Specular
+    second: {fileID: 2800000, guid: 94586c7d0cada154eb798934ebcc1efc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Hat_Diffuse
+    second: {fileID: 2800000, guid: d7517069075f77c499054b1ce7d045b0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Hat_Gloss
+    second: {fileID: 2800000, guid: 83098e83c7bd9284a83fdc9f837d1fc1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Hat_Normal
+    second: {fileID: 2800000, guid: 6c79b913b2d4b014e8eaff4bfd8e3c8c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Hat_Opacity
+    second: {fileID: 2800000, guid: 4a0a5c3ef9cf22841aa9f582575e999d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Hat_Specular
+    second: {fileID: 2800000, guid: 7ac390223af6f564e9c87c07d9d207ac, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Shoes_Diffuse
+    second: {fileID: 2800000, guid: 752ec15326f2f144bb8a9ee3c30ed52e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Shoes_Gloss
+    second: {fileID: 2800000, guid: 0f5632304c093774d85d8a83f74e5d05, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Shoes_Normal
+    second: {fileID: 2800000, guid: e299332b53abe3e4da0d0d5aaec5beaa, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Shoes_Opacity
+    second: {fileID: 2800000, guid: 16e97a5931637a94e89fa59a36116f52, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Shoes_Specular
+    second: {fileID: 2800000, guid: 3bb2d3d23cd7c4a4ab04c955decf0965, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Top_Diffuse
+    second: {fileID: 2800000, guid: d4a156d8777ce9e4e9ca036d758680d7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Top_Gloss
+    second: {fileID: 2800000, guid: 3dd5911042687b348900af92b708d2b6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Top_Normal
+    second: {fileID: 2800000, guid: 35eb737c3650638408ddd19be7680a58, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Top_Opacity
+    second: {fileID: 2800000, guid: 196aea13665b0da4dbcacffeef1b3186, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SWAT_Soldier_2_Top_Specular
+    second: {fileID: 2800000, guid: 0b89c0103f2c1cb47b912911ab27c276, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 10
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 0.099999994
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
