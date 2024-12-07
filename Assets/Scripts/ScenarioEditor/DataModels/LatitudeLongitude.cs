@@ -19,8 +19,8 @@ public class LatitudeLongitute
         return new Vector2(Longitude * metersPerDegree, Latitude * metersPerDegree);
     }
 
-    public static LatitudeLongitute FromUnityCoordinates(float X, float Y)
+    public static LatitudeLongitute FromUnityCoordinates(float x, float z)
     {
-        return new LatitudeLongitute(Y / metersPerDegree, X / metersPerDegree);
+        return new LatitudeLongitute(z / metersPerDegree, x / metersPerDegree);
     }
 }
