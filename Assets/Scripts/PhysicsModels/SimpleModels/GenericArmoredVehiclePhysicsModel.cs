@@ -12,11 +12,12 @@ public class GenericArmoredVehiclePhysicsModel : MonoBehaviour
     [Header("Motor")]
     public float Power = 1200E3F; // Watt
     public float RPM = 1500.0F;
-
     private float TorquePerWheel; // Nm
     
-    private float ThrustInput = 0.0F;
-    private float SteerInput = 0.0F;
+    [Header("Control Inputs")]
+    [Range(0, 1)] public float ThrustInput = 0.0F;
+    [Range(-1, 1)] public float SteerInput = 0.0F;
+    
     private bool Breaking = false;
 
     [Header("Rigidbody Settings")]
@@ -60,6 +61,11 @@ public class GenericArmoredVehiclePhysicsModel : MonoBehaviour
         }
     }
 
+    public void SetBrakeState(bool newState)
+    {
+        Breaking = newState;
+    }
+
     private void ApplyTorque()
     {
         foreach (WheelCollider wheel in RightPalette)
@@ -75,6 +81,8 @@ public class GenericArmoredVehiclePhysicsModel : MonoBehaviour
 
     private void ApplyBrake()
     {
+        SetThrust(0.0F);
+
         foreach (WheelCollider wheel in RightPalette)
         {
             wheel.motorTorque = 0.0F;
@@ -88,31 +96,34 @@ public class GenericArmoredVehiclePhysicsModel : MonoBehaviour
         }
     }
 
+    private float EvaluateTotalTorque()
+    {
+        return (Power * 60.0F) / (2.0F * Mathf.PI * RPM);
+    }
+
     private float EvaluateBaseTorque()
     {
         return ThrustInput * TorquePerWheel;
     }
 
-    private float EvalueateSteeringTorque()
+    private float EvaluateSteeringTorque()
     {
         return SteerInput * ThrustInput * SteeringThrustCoefficient;
     }
 
     private float EvaluateEffectiveRightTorque()
     {
-        return EvaluateBaseTorque() - EvalueateSteeringTorque();
+        return EvaluateBaseTorque() - EvaluateSteeringTorque();
     }
 
     private float EvaluateEffectiveLeftTorque()
     {
-        return EvaluateBaseTorque() + EvalueateSteeringTorque();
+        return EvaluateBaseTorque() + EvaluateSteeringTorque();
     }
 
     private void SetTorquePerWheel()
     {
-        float TotalTorque = (Power * 60.0F) / (2.0F * Mathf.PI * RPM);
-
-        TorquePerWheel = TotalTorque / RightPalette.Count;
+        TorquePerWheel = EvaluateTotalTorque() / RightPalette.Count;
     }
 
     private void SetMass()

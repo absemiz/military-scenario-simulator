@@ -6,15 +6,15 @@ using UnityEngine;
 
 using StatePredicators;
 
-public class GenericArmoredVehicleController : MonoBehaviour
+public class GenericRotaryWingController : MonoBehaviour
 {
     [Header("Go To Tasks")]
     public List<Vector3> GoToTasks = new();
 
     [Header("Physics Model")]
-    public GenericArmoredVehiclePhysicsModel PhysicsModel;
+    public GenericRotaryWingPhysicsModel PhysicsModel;
 
-    public delegate void StateHandler(GenericArmoredVehicleController controller);
+    public delegate void StateHandler(GenericRotaryWingController controller);
 
     private Dictionary<RigidbodyPredicator, StateHandler> RigidbodyStateHandlers = new();
 
@@ -45,28 +45,39 @@ public class GenericArmoredVehicleController : MonoBehaviour
         }
         else
         {
-            PhysicsModel.SetSteering(EvaluateSteering(currentTask));
-            PhysicsModel.SetThrust(EvaluateThrust(currentTask));
+            PhysicsModel.SetCollectiveInput(EvaluateCollective(currentTask));
+            PhysicsModel.SetCyclicPitchInput(EvaluateCyclicPitch(currentTask));
+            PhysicsModel.SetCyclicRollInput(EvaluateCyclicRoll(currentTask));
         }
     }
 
-    private float EvaluateThrust(Vector3 target)
+    private float EvaluateCollective(Vector3 target)
     {
-        Vector3 currentPosition = new Vector3(transform.position.x, 0, transform.position.z);
-        Vector3 pathVector = new Vector3(target.x, 0, target.z) - currentPosition;
+        float heightDifference = target.y - transform.position.y;
 
-        return Mathf.Clamp(pathVector.magnitude, 0.0f, 1.0f);
+        return Mathf.Clamp(heightDifference * 0.1f, -1.0f, 1.0f);
     }
 
-    private float EvaluateSteering(Vector3 target)
+    private float EvaluateCyclicPitch(Vector3 target)
     {
         Vector3 currentPosition = new Vector3(transform.position.x, 0, transform.position.z);
-        Vector3 forwardDirection = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
-        Vector3 targetDirection = (new Vector3(target.x, 0, target.z) - currentPosition).normalized;
+        Vector3 targetPosition = new Vector3(target.x, 0, target.z);
+        Vector3 directionToTarget = (targetPosition - currentPosition).normalized;
 
-        float angle = Vector3.SignedAngle(forwardDirection, targetDirection, Vector3.up);
+        float forwardAngle = Vector3.Dot(transform.forward, directionToTarget);
 
-        return Mathf.Clamp(angle * 0.01f, -1.0f, 1.0f);
+        return Mathf.Clamp(forwardAngle, -1.0f, 1.0f);
+    }
+
+    private float EvaluateCyclicRoll(Vector3 target)
+    {
+        Vector3 currentPosition = new Vector3(transform.position.x, 0, transform.position.z);
+        Vector3 targetPosition = new Vector3(target.x, 0, target.z);
+        Vector3 directionToTarget = (targetPosition - currentPosition).normalized;
+
+        float sideAngle = Vector3.Dot(transform.right, directionToTarget);
+
+        return Mathf.Clamp(sideAngle, -1.0f, 1.0f);
     }
 
     public void AddGoToTask(Vector3 targetPosition)
@@ -81,26 +92,15 @@ public class GenericArmoredVehicleController : MonoBehaviour
 
     public void Stop()
     {
-        if (PhysicsModel.Rigidbody.velocity.magnitude > 0.0f)
-        {
-            PhysicsModel.SetBrakeState(true);
-        }
-        else
-        {
-            PhysicsModel.SetBrakeState(false);
-        }
+        PhysicsModel.SetCollectiveInput(0.0f);
+        PhysicsModel.SetCyclicPitchInput(0.0f);
+        PhysicsModel.SetCyclicRollInput(0.0f);
+        PhysicsModel.SetYawInput(0.0f);
     }
 
     void AddRigidbodyStateHandler(RigidbodyPredicator stateFilter, StateHandler stateHandler)
     {
         RigidbodyStateHandlers.Add(stateFilter, stateHandler);
-    }
-
-    private bool GoToTaskCompleted(Vector3 targetPosition)
-    {
-        float epsilon = 1.0f;
-
-        return Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(targetPosition.x, 0, targetPosition.z)) < epsilon;
     }
 
     private void ApplyRigidbodyStateHandlers()
@@ -114,11 +114,18 @@ public class GenericArmoredVehicleController : MonoBehaviour
         }
     }
 
+    private bool GoToTaskCompleted(Vector3 targetPosition)
+    {
+        float epsilon = 1.0f;
+
+        return Vector3.Distance(transform.position, targetPosition) < epsilon;
+    }
+
     private void InitializePhysicsModel()
     {
         if (!PhysicsModel)
         {
-            PhysicsModel = gameObject.GetComponent<GenericArmoredVehiclePhysicsModel>();
+            PhysicsModel = gameObject.GetComponent<GenericRotaryWingPhysicsModel>();
         }
     }
 }
