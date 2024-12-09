@@ -20,14 +20,15 @@ public class ScenarioEditorServer : MonoBehaviour
     {
         listener = new HttpListener();
 
-        string root = $"http://localhost:{port}/";
-        string api = $"{root}milsimapi/";
+        string root = $"http://localhost:{port}";
+        string api = $"{root}/milsimapi";
 
         listener.Prefixes.Add(root);
         listener.Prefixes.Add(api);
 
         listener.Start();
-        Debug.Log("Server started at " + root);
+        Debug.Log($"Server listening on {root}");
+        Debug.Log($"Server listening on {api}");
         listener.BeginGetContext(new AsyncCallback(OnRequest), listener);
     }
 
@@ -42,7 +43,6 @@ public class ScenarioEditorServer : MonoBehaviour
     {
         string path = context.Request.Url.AbsolutePath;
         string rootFilePath = $"{Application.dataPath}/ScenarioEditor/dist";
-        Debug.Log(rootFilePath);
 
         string filePath = "";
 
@@ -68,8 +68,6 @@ public class ScenarioEditorServer : MonoBehaviour
         }
         else if (path == "/milsimapi")
         {
-            Debug.Log("Request received.");
-            Debug.Log(context.Request);
             InitializationMessage parsedMessage = ParseJsonRequest(context.Request);
 
             if (parsedMessage != null)

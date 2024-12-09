@@ -74,3 +74,5 @@ desktop.ini
 # Ignore crash logs #
 # ================= #
 crash-reports/
+
+.vs/
