@@ -1,6 +1,7 @@
 public class MilitaryEntity
 {
     public string ID { get; set; }
+
     public double Latitude { get; set; }
 
     public double Longitude { get; set; }
@@ -16,4 +17,6 @@ public class MilitaryEntity
     public double Fuel { get; set; }
 
     public int Affiliation { get; set; }
+
+    public string Type { get; set; }
 }

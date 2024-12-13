@@ -11,32 +11,36 @@ using Newtonsoft.Json;
 
 public class ScenarioEditorServer : MonoBehaviour
 {
-    private HttpListener listener;
+    private HttpListener Listener;
 
     [SerializeField]
-    private int port = 8080;
+    private int Port = 8080;
+
+    private InitializationMessage LastInitializationMessage = null;
+
+    public InitializationMessage GetInitializationMessage() { return LastInitializationMessage; }
 
     void Start()
     {
-        listener = new HttpListener();
+        Listener = new HttpListener();
 
-        string root = $"http://localhost:{port}";
-        string api = $"{root}/milsimapi";
+        string root = $"http://localhost:{Port}/";
+        string api = $"{root}milsimapi/";
 
-        listener.Prefixes.Add(root);
-        listener.Prefixes.Add(api);
+        Listener.Prefixes.Add(root);
+        Listener.Prefixes.Add(api);
 
-        listener.Start();
+        Listener.Start();
         Debug.Log($"Server listening on {root}");
         Debug.Log($"Server listening on {api}");
-        listener.BeginGetContext(new AsyncCallback(OnRequest), listener);
+        Listener.BeginGetContext(new AsyncCallback(OnRequest), Listener);
     }
 
     private void OnRequest(IAsyncResult result)
     {
-        var context = listener.EndGetContext(result);
+        var context = Listener.EndGetContext(result);
         ProcessRequest(context); 
-        listener.BeginGetContext(new AsyncCallback(OnRequest), listener);
+        Listener.BeginGetContext(new AsyncCallback(OnRequest), Listener);
     }
 
     private void ProcessRequest(HttpListenerContext context)
@@ -53,7 +57,7 @@ public class ScenarioEditorServer : MonoBehaviour
         }
         else if (path.EndsWith(".js"))
         {
-            filePath = $"{rootFilePath}/assets/index-1jdui-py.js";
+            filePath = $"{rootFilePath}/assets/index-Dp-oFPFX.js";
             context.Response.ContentType = "application/javascript";
         }
         else if (path.EndsWith(".css"))
@@ -77,22 +81,9 @@ public class ScenarioEditorServer : MonoBehaviour
 
                 context.Response.OutputStream.Write(rawResponseMessage, 0, rawResponseMessage.Length);
 
-                foreach (var entry in parsedMessage.Entities)
-                {
-                    Debug.Log($"ID: {entry.ID}, Latitude: {entry.Latitude}, Longitude: {entry.Longitude}");
-                }
+                Debug.Log(parsedMessage.Entities[0].Type);
 
-                foreach (var entry in parsedMessage.Paths)
-                {
-                    Debug.Log(entry.Points);
-                    Debug.Log(entry.ID);
-                }
-
-                foreach (var entry in parsedMessage.Waypoints)
-                {
-                    Debug.Log(entry.Position);
-                    Debug.Log(entry.ID);
-                }
+                LastInitializationMessage = parsedMessage;
             }
             else
             {
@@ -125,7 +116,7 @@ public class ScenarioEditorServer : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        listener.Stop();
+        Listener.Stop();
     }
 }
 

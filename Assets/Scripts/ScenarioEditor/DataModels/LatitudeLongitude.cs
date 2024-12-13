@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class LatitudeLongitute
 {
-    private const float metersPerDegree = 111E3f;
 
-    LatitudeLongitute(float latitude, float longitude)
+    private const float metersPerDegree = 111E3F;
+
+    public LatitudeLongitute(float latitude, float longitude)
     {
         Latitude = latitude;
         Longitude = longitude;
@@ -19,7 +20,13 @@ public class LatitudeLongitute
         return new Vector2(Longitude * metersPerDegree, Latitude * metersPerDegree);
     }
 
-    public static LatitudeLongitute FromUnityCoordinates(float x, float z)
+    public void ToUnityCoordinates(out float z, out float x)
+    {
+        z = Latitude * metersPerDegree;
+        x = Longitude * metersPerDegree;
+    }
+
+    public static LatitudeLongitute FromUnityCoordinates(float z, float x)
     {
         return new LatitudeLongitute(z / metersPerDegree, x / metersPerDegree);
     }
