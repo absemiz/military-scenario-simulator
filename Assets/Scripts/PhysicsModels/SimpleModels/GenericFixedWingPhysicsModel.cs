@@ -60,7 +60,6 @@ public class GenericFixedWingPhysicsModel : MonoBehaviour
 
     private void ApplyDrag()
     {
-        // Drag force = 0.5 * AirDensity * Velocity² * DragCoefficient * WingArea
         float airDensity = 1.225f;
         float velocitySquared = Rigidbody.velocity.sqrMagnitude;
         float dragForceMagnitude = 0.5f * airDensity * velocitySquared * DragCoefficient * WingArea;

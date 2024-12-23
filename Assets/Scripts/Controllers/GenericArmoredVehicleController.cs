@@ -66,11 +66,13 @@ public class GenericArmoredVehicleController : MonoBehaviour
 
         float angle = Vector3.SignedAngle(forwardDirection, targetDirection, Vector3.up);
 
-        return Mathf.Clamp(angle * 0.01f, -1.0f, 1.0f);
+        return Mathf.Clamp(angle / 45.0f, -1.0f, 1.0f);
     }
 
     public void AddGoToTask(Vector3 targetPosition)
     {
+        Debug.Log($"Go To Task Added: {targetPosition}");
+
         GoToTasks.Add(targetPosition);
     }
 
@@ -98,7 +100,7 @@ public class GenericArmoredVehicleController : MonoBehaviour
 
     private bool GoToTaskCompleted(Vector3 targetPosition)
     {
-        float epsilon = 1.0f;
+        float epsilon = 10.0f;
 
         return Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(targetPosition.x, 0, targetPosition.z)) < epsilon;
     }

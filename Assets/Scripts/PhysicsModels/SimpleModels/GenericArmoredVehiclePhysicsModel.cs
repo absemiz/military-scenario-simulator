@@ -10,8 +10,8 @@ public class GenericArmoredVehiclePhysicsModel : MonoBehaviour
     public List<WheelCollider> LeftPalette;
 
     [Header("Motor")]
-    public float Power = 1200E3F; // Watt
-    public float RPM = 1500.0F;
+    public float Power = 2000E3F; // Watt
+    public float RPM = 2000.0F;
     private float TorquePerWheel; // Nm
     
     [Header("Control Inputs")]
@@ -20,12 +20,14 @@ public class GenericArmoredVehiclePhysicsModel : MonoBehaviour
     
     private bool Breaking = false;
 
+    private readonly float GearRatio = 10.0F;
+
     [Header("Rigidbody Settings")]
     public Rigidbody Rigidbody;
-    public float Mass = 60E3F; // Kg
+    public float Mass = 50E3F; // Kg
 
     [Header("Steering")]
-    public float SteeringThrustCoefficient = 800.0F;
+    public float SteeringThrustCoefficient = 100000.0F;
 
     [Header("Brake")]
     public float BrakeTorque = 3000.0F; // Nm
@@ -53,11 +55,14 @@ public class GenericArmoredVehiclePhysicsModel : MonoBehaviour
 
     public void HandleMovement()
     {
-        ApplyTorque();
-
         if (Breaking)
         {
             ApplyBrake();
+        }
+        else
+        {
+            ReleaseBrake();
+            ApplyTorque();
         }
     }
 
@@ -96,6 +101,19 @@ public class GenericArmoredVehiclePhysicsModel : MonoBehaviour
         }
     }
 
+    private void ReleaseBrake()
+    {
+        foreach (WheelCollider wheel in RightPalette)
+        {
+            wheel.brakeTorque = 0.0F;
+        }
+
+        foreach (WheelCollider wheel in LeftPalette)
+        {
+            wheel.brakeTorque = 0.0F;
+        }
+    }
+
     private float EvaluateTotalTorque()
     {
         return (Power * 60.0F) / (2.0F * Mathf.PI * RPM);
@@ -123,7 +141,7 @@ public class GenericArmoredVehiclePhysicsModel : MonoBehaviour
 
     private void SetTorquePerWheel()
     {
-        TorquePerWheel = EvaluateTotalTorque() / RightPalette.Count;
+        TorquePerWheel = GearRatio * EvaluateTotalTorque() / (RightPalette.Count);
     }
 
     private void SetMass()

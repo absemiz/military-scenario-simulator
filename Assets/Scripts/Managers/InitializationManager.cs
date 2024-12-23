@@ -1,4 +1,5 @@
 using Newtonsoft.Json.Bson;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,7 @@ public class InitializationManager : MonoBehaviour
 
     private bool Initialized = false;
 
-    private delegate void CreateFunction(MilitaryEntity entity);
+    private delegate void CreateFunction(EntityMessageObject entity, List<Waypoint> waypoints);
 
     void Start()
     {
@@ -76,11 +77,11 @@ public class InitializationManager : MonoBehaviour
             { "Infantry", CreateInfantry }
         };
 
-        foreach (MilitaryEntity entity in Server.GetInitializationMessage().Entities)
+        foreach (EntityMessageObject entity in Server.GetInitializationMessage().Entities)
         {
             if (EntityCreationHandlerTable.ContainsKey(entity.Type))
             {
-                EntityCreationHandlerTable[entity.Type](entity);
+                EntityCreationHandlerTable[entity.Type](entity, Server.GetInitializationMessage().Waypoints);
             }
             else
             {
@@ -89,36 +90,58 @@ public class InitializationManager : MonoBehaviour
         }
     }
 
-    private void CreateArmoredVehicle(MilitaryEntity entity)
+    private void CreateArmoredVehicle(EntityMessageObject entity, List<Waypoint> waypoints)
     {
-        InstantiateEntity(ArmoredVehiclePrefab, entity);
+        GameObject armoredVehicle = InstantiateEntity(ArmoredVehiclePrefab, entity);
+
+        GenericArmoredVehicleController armoredVehicleController = armoredVehicle.GetComponent<GenericArmoredVehicleController>();
+
+        foreach (string attachedWaypointID in entity.AttachedWaypoints)
+        {
+            Waypoint targetWaypoint = waypoints.Find(waypoint => waypoint.ID.Equals(attachedWaypointID));
+
+            if (targetWaypoint != null)
+            {
+                LatitudeLongitute latitudeLongitute = new LatitudeLongitute(Convert.ToSingle(targetWaypoint.Position[0]), Convert.ToSingle(targetWaypoint.Position[1]));
+
+                latitudeLongitute.ToUnityCoordinates(out float z, out float x);
+                armoredVehicleController.AddGoToTask(x, 0, z);
+            }
+        }
+
+        RuntimeManager.Instance.AddTrackedEntity(armoredVehicle);
     }
 
-    private void CreateFixedWing(MilitaryEntity entity)
+    private void CreateFixedWing(EntityMessageObject entityMessageObject, List<Waypoint> waypoints)
     {
-        InstantiateEntity(FixedWingPrefab, entity);
+        InstantiateEntity(FixedWingPrefab, entityMessageObject);
     }
 
-    private void CreateRotaryWing(MilitaryEntity entity)
+    private void CreateRotaryWing(EntityMessageObject entityMessageObject, List<Waypoint> waypoints)
     {
-        InstantiateEntity(RotaryWingPrefab, entity);
+        InstantiateEntity(RotaryWingPrefab, entityMessageObject);
     }
 
-    private void CreateInfantry(MilitaryEntity entity)
+    private void CreateInfantry(EntityMessageObject entityMessageObject, List<Waypoint> waypoints)
     {
-        InstantiateEntity(InfantryPrefab, entity);
+        InstantiateEntity(InfantryPrefab, entityMessageObject);
     }
 
-    private void InstantiateEntity(GameObject prefab, MilitaryEntity entity)
+    private GameObject InstantiateEntity(GameObject prefab, EntityMessageObject entityMessageObject)
     {
-        Vector2 position = new LatitudeLongitute((float)entity.Latitude, (float)entity.Longitude).ToUnityCoordinates();
+        LatitudeLongitute position = new LatitudeLongitute(Convert.ToSingle(entityMessageObject.Latitude), Convert.ToSingle(entityMessageObject.Longitude));
 
-        Vector3 worldPosition = new Vector3(position.x, (float)entity.Altitude, position.y);
+        position.ToUnityCoordinates(out float z, out float x);
 
-        Quaternion rotation = Quaternion.Euler((float)entity.Pitch, (float)entity.Heading, (float)entity.Roll);
+        Vector3 worldPosition = new Vector3(x, Convert.ToSingle(entityMessageObject.Altitude), z);
+
+        Quaternion rotation = Quaternion.Euler(Convert.ToSingle(entityMessageObject.Pitch), Convert.ToSingle(entityMessageObject.Heading), Convert.ToSingle(entityMessageObject.Roll));
 
         GameObject entityGameObject = Instantiate(prefab, worldPosition, rotation);
 
-        entityGameObject.name = $"{entity.Type}_{entity.ID}";
+        entityGameObject.tag = "MilitaryEntity";
+        entityGameObject.name = $"{entityMessageObject.ID}";
+
+        return entityGameObject;
     }
 }
