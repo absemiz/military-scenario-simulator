@@ -90,8 +90,6 @@ public class ScenarioEditorServer : MonoBehaviour
         {
             if (context.Request.Headers.Get("Message-Kind").Equals("scenario/update-state"))
             {
-                Debug.Log("Creating update state response...");
-
                 string response;
 
                 if (RuntimeManager.Instance == null)
@@ -141,18 +139,6 @@ public class ScenarioEditorServer : MonoBehaviour
         Listener.Stop();
     }
 
-    /*private void InitializeRuntimeManager()
-    {
-        if (RuntimeManager == null)
-        {
-            RuntimeManager = GameObject.FindObjectOfType<RuntimeManager>();
-
-            if (RuntimeManager == null)
-            {
-                Debug.Log("RuntimeManager must be specified.");
-            }
-        }
-    }*/
 }
 
 

@@ -6,7 +6,7 @@ using UnityEngine;
 
 using StatePredicators;
 
-public class GenericArmoredVehicleController : MonoBehaviour
+public class GenericArmoredVehicleController : MonoBehaviour, IEntityController
 {
     [Header("Go To Tasks")]
     public List<Vector3> GoToTasks = new();

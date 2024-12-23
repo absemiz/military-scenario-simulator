@@ -90,24 +90,13 @@ public class InitializationManager : MonoBehaviour
         }
     }
 
-    private void CreateArmoredVehicle(EntityMessageObject entity, List<Waypoint> waypoints)
+    private void CreateArmoredVehicle(EntityMessageObject entityMessage, List<Waypoint> waypoints)
     {
-        GameObject armoredVehicle = InstantiateEntity(ArmoredVehiclePrefab, entity);
+        GameObject armoredVehicle = InstantiateEntity(ArmoredVehiclePrefab, entityMessage);
 
         GenericArmoredVehicleController armoredVehicleController = armoredVehicle.GetComponent<GenericArmoredVehicleController>();
 
-        foreach (string attachedWaypointID in entity.AttachedWaypoints)
-        {
-            Waypoint targetWaypoint = waypoints.Find(waypoint => waypoint.ID.Equals(attachedWaypointID));
-
-            if (targetWaypoint != null)
-            {
-                LatitudeLongitute latitudeLongitute = new LatitudeLongitute(Convert.ToSingle(targetWaypoint.Position[0]), Convert.ToSingle(targetWaypoint.Position[1]));
-
-                latitudeLongitute.ToUnityCoordinates(out float z, out float x);
-                armoredVehicleController.AddGoToTask(x, 0, z);
-            }
-        }
+        AttachTasks(armoredVehicle, entityMessage, waypoints, armoredVehicleController);
 
         RuntimeManager.Instance.AddTrackedEntity(armoredVehicle);
     }
@@ -143,5 +132,22 @@ public class InitializationManager : MonoBehaviour
         entityGameObject.name = $"{entityMessageObject.ID}";
 
         return entityGameObject;
+    }
+
+    private void AttachTasks(GameObject entity, EntityMessageObject entityMessage, List<Waypoint> waypoints, IEntityController controller)
+    {
+        foreach (string attachedWaypointID in entityMessage.AttachedWaypoints)
+        {
+            Waypoint targetWaypoint = waypoints.Find(waypoint => waypoint.ID.Equals(attachedWaypointID));
+
+            if (targetWaypoint != null)
+            {
+                LatitudeLongitute latitudeLongitute = new(Convert.ToSingle(targetWaypoint.Position[0]), Convert.ToSingle(targetWaypoint.Position[1]));
+
+                latitudeLongitute.ToUnityCoordinates(out float z, out float x);
+
+                controller.AddGoToTask(x, 0, z);
+            }
+        }
     }
 }
